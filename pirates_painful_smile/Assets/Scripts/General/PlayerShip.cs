@@ -6,6 +6,15 @@ public class PlayerShip : Ship
 {
     public bool canReceiveInput;
 
+    public override void Start()
+    {
+        body = ShipData.ship_body;
+        flags = ShipData.player_flags;
+        ship_renderer.sprite = body[0];
+        flag_renderer.sprite = flags[0];
+        base.Start();
+    }
+
     public override void Update()
     {
         PlayerMovement();

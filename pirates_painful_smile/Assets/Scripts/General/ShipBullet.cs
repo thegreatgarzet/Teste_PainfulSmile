@@ -17,4 +17,12 @@ public class ShipBullet : MonoBehaviour
     {
         transform.Translate(Vector2.right * Time.deltaTime * bullet_Movespeed);
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            //toca animação de explosão
+            //causa dano
+        }
+    }
 }

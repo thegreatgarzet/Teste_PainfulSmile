@@ -263,7 +263,6 @@ GameObject:
   m_Component:
   - component: {fileID: 773525701}
   - component: {fileID: 773525702}
-  - component: {fileID: 773525703}
   m_Layer: 0
   m_Name: hp_bar
   m_TagString: Untagged
@@ -285,7 +284,7 @@ Transform:
   m_Children:
   - {fileID: 1767615891}
   m_Father: {fileID: 1415442449}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &773525702
 SpriteRenderer:
@@ -339,19 +338,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
---- !u!114 &773525703
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 773525700}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32d1ba6e5b1fcc340be18d9eb63c8d1c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HealthBarColorData: {fileID: 11400000, guid: ab4bbea5721c85444a15797860fba52b, type: 2}
 --- !u!1 &858870659
 GameObject:
   m_ObjectHideFlags: 0
@@ -559,6 +545,7 @@ GameObject:
   - component: {fileID: 1415442449}
   - component: {fileID: 1415442448}
   - component: {fileID: 1415442447}
+  - component: {fileID: 1415442450}
   m_Layer: 0
   m_Name: player_teste
   m_TagString: Untagged
@@ -590,6 +577,12 @@ MonoBehaviour:
   timeBetweenSideShots: 2
   canShot: 1
   hpBar: {fileID: 773525701}
+  flags: []
+  body: []
+  ShipData: {fileID: 11400000, guid: ab4bbea5721c85444a15797860fba52b, type: 2}
+  hp_bar_Renderer: {fileID: 1767615892}
+  ship_renderer: {fileID: 1415442448}
+  flag_renderer: {fileID: 1611171232}
   canReceiveInput: 1
 --- !u!212 &1415442448
 SpriteRenderer:
@@ -655,12 +648,24 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1611171231}
   - {fileID: 773525701}
   - {fileID: 2044448210}
-  - {fileID: 1611171231}
   m_Father: {fileID: 858870660}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1415442450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1415442446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32d1ba6e5b1fcc340be18d9eb63c8d1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1611171230
 GameObject:
   m_ObjectHideFlags: 0
@@ -672,7 +677,7 @@ GameObject:
   - component: {fileID: 1611171231}
   - component: {fileID: 1611171232}
   m_Layer: 0
-  m_Name: ships_parts_9
+  m_Name: flag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -691,7 +696,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1415442449}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1611171232
 SpriteRenderer:
@@ -1125,5 +1130,5 @@ Transform:
   - {fileID: 1290265565}
   - {fileID: 1983243596}
   m_Father: {fileID: 1415442449}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

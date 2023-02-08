@@ -5,7 +5,7 @@ using UnityEngine;
 public class Ship : MonoBehaviour
 {
 
-    public float shipHp;
+    public float Hp;
     public float shipSpeed;
     public float rotationSpeed;
 
@@ -16,9 +16,15 @@ public class Ship : MonoBehaviour
     public bool canShot;
 
     public Transform hpBar;
-    Sprite[] flags, body;
+    public Sprite[] flags, body;
+    public ShipSettings ShipData;
+    public ShipHp _shipHp;
 
-    private void Start()
+    public SpriteRenderer hp_bar_Renderer;
+    public SpriteRenderer ship_renderer;
+    public SpriteRenderer flag_renderer;
+
+    public virtual void Start()
     {
         hpBar.transform.SetParent(null);
     }
@@ -48,6 +54,13 @@ public class Ship : MonoBehaviour
         }
         StartCoroutine(ShotCoolDown(timeBetweenSideShots));
     }
+    
+    public void ReceiveDamage()
+    {
+        _shipHp.UpdateShip(Hp);
+    }
+
+    
 
     IEnumerator ShotCoolDown(float cooldownTimer)
     {

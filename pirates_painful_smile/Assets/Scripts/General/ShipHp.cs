@@ -4,58 +4,42 @@ using UnityEngine;
 
 public class ShipHp : MonoBehaviour
 {
-    SpriteRenderer _hp_bar_Renderer;
-    SpriteRenderer ship_renderer;
-    SpriteRenderer flag_renderer;
-
     Ship _ship;
-
-    [SerializeField] ShipSettings ShipData;
     private void Start()
     {
-        
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            ReceiveDamage(10);
-        }
-        
+        _ship = GetComponent<Ship>();
     }
 
     void SetColorAndSprite()
     {
-        Color32 hp_bar_new_color = ShipData.HealthBarColors[0];
+        Color32 hp_bar_new_color = _ship.ShipData.HealthBarColors[0];
 
-        if(_hp_bar_Renderer.size.x < .75)
+        if(_ship.hp_bar_Renderer.size.x < .75)
         {
-            hp_bar_new_color = ShipData.HealthBarColors[1];
-            flag_renderer.sprite = _ship.flags[1];
+            hp_bar_new_color = _ship.ShipData.HealthBarColors[1];
+            _ship.flag_renderer.sprite = _ship.flags[1];
         }
-        if (_hp_bar_Renderer.size.x < .5)
+        if (_ship.hp_bar_Renderer.size.x < .5)
         {
-            hp_bar_new_color = ShipData.HealthBarColors[2];
-            flag_renderer.sprite = _ship.flags[2];
-            ship_renderer.sprite = _ship.body[1];
+            hp_bar_new_color = _ship.ShipData.HealthBarColors[2];
+            _ship.flag_renderer.sprite = _ship.flags[2];
+            _ship.ship_renderer.sprite = _ship.body[1];
         }
-        if (_hp_bar_Renderer.size.x < .25)
+        if (_ship.hp_bar_Renderer.size.x < .25)
         {
-            hp_bar_new_color = ShipData.HealthBarColors[3];
-            ship_renderer.sprite = _ship.body[2];
-            flag_renderer.sprite = null;
+            hp_bar_new_color = _ship.ShipData.HealthBarColors[3];
+            _ship.ship_renderer.sprite = _ship.body[2];
+            _ship.flag_renderer.sprite = null;
         }
-        _hp_bar_Renderer.color = hp_bar_new_color;
+        _ship.hp_bar_Renderer.color = hp_bar_new_color;
     }
 
-    public void ReceiveDamage(int dmg)
+    public void UpdateShip(float dmg)
     {
-        _hp_bar_Renderer.size -= (Vector2.right * dmg)/100f;
-        print("Teste");
-        if (_hp_bar_Renderer.size.x <0)
+        _ship.hp_bar_Renderer.size = (Vector2.right * dmg)/100f;
+        if (_ship.hp_bar_Renderer.size.x <0)
         {
-            _hp_bar_Renderer.size = Vector2.up;
+            _ship.hp_bar_Renderer.size = Vector2.up;
         }
         SetColorAndSprite();
     }
