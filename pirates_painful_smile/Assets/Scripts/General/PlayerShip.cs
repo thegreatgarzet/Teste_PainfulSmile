@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class PlayerShip : Ship
 {
-    public bool canReceiveInput;
+    
 
     public override void Start()
     {
-        body = ShipData.ship_body;
-        flags = ShipData.player_flags;
-        ship_renderer.sprite = body[0];
-        flag_renderer.sprite = flags[0];
+        body = shipData.ship_body;
+        flags = shipData.player_flags;
+        body_Renderer.sprite = body[0];
+        flag_Renderer.sprite = flags[0];
         base.Start();
     }
 

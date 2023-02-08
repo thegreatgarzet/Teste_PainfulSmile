@@ -6,31 +6,39 @@ public class Ship : MonoBehaviour
 {
 
     public float Hp;
+    public float contactDamage;
+    public float bulletDamage;
     public float shipSpeed;
     public float rotationSpeed;
 
-    public ShipBullet BulletPrefab;
-    public Transform[] SideShotPositions;
+    public ShipBullet bulletPrefab;
+    public Transform[] sideShotPositions;
 
     public float timeBetweenNormalShots, timeBetweenSideShots;
     public bool canShot;
 
-    public Transform hpBar;
+    public Transform shipHpBar_Transform;
     public Sprite[] flags, body;
-    public ShipSettings ShipData;
-    public ShipHp _shipHp;
+    public ShipSettings shipData;
+    public ShipStatus _shipStatus;
 
-    public SpriteRenderer hp_bar_Renderer;
-    public SpriteRenderer ship_renderer;
-    public SpriteRenderer flag_renderer;
+    public SpriteRenderer hpBar_Renderer;
+    public SpriteRenderer body_Renderer;
+    public SpriteRenderer flag_Renderer;
+
+    public bool canReceiveInput;
 
     public virtual void Start()
     {
-        hpBar.transform.SetParent(null);
+        shipHpBar_Transform.transform.SetParent(null);
     }
     public virtual void Update()
     {
-        hpBar.position = (Vector2)transform.position + Vector2.up * 3;
+        shipHpBar_Transform.position = (Vector2)transform.position + Vector2.up * 3;
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            ReceiveDamage(10);
+        }
     }
     public void ShootBullet()
     {
@@ -38,7 +46,7 @@ public class Ship : MonoBehaviour
         {
             return;
         }
-        Instantiate(BulletPrefab, SideShotPositions[0].position, Quaternion.identity).SetBulletParam(transform.rotation.eulerAngles);
+        Instantiate(bulletPrefab, sideShotPositions[0].position, Quaternion.identity).SetBulletParam(transform.rotation.eulerAngles, transform, bulletDamage);
         StartCoroutine(ShotCoolDown(timeBetweenNormalShots));
     }
     public void ShootSideBullets()
@@ -47,17 +55,26 @@ public class Ship : MonoBehaviour
         {
             return;
         }
-        foreach (Transform spawn_point in SideShotPositions)
+        foreach (Transform spawn_point in sideShotPositions)
         {
-            Instantiate(BulletPrefab, spawn_point.position, Quaternion.identity).SetBulletParam(transform.rotation.eulerAngles + new Vector3(0, 0, 90f));
-            Instantiate(BulletPrefab, spawn_point.position, Quaternion.identity).SetBulletParam(transform.rotation.eulerAngles + new Vector3(0, 0, -90f));
+            Instantiate(bulletPrefab, spawn_point.position, Quaternion.identity).SetBulletParam(transform.rotation.eulerAngles + new Vector3(0, 0, 90f), transform, bulletDamage);
+            Instantiate(bulletPrefab, spawn_point.position, Quaternion.identity).SetBulletParam(transform.rotation.eulerAngles + new Vector3(0, 0, -90f), transform, bulletDamage);
         }
         StartCoroutine(ShotCoolDown(timeBetweenSideShots));
     }
     
-    public void ReceiveDamage()
+
+
+    public void ReceiveDamage(float dmg_value)
     {
-        _shipHp.UpdateShip(Hp);
+        Hp -= dmg_value;
+        if (Hp <= 0)
+        {
+            Hp = 0;
+            canReceiveInput = false;
+        }
+        _shipStatus.SetShipStatus(Hp);
+        
     }
 
     
@@ -67,5 +84,15 @@ public class Ship : MonoBehaviour
         canShot = false;
         yield return new WaitForSeconds(cooldownTimer);
         canShot = true;
+    }
+
+    IEnumerator SpawnRoutine()
+    {
+        yield return null;
+    }
+
+    IEnumerator DeathRoutine()
+    {
+        yield return null;
     }
 }
