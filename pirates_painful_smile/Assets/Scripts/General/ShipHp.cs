@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class ShipHp : MonoBehaviour
 {
-    SpriteRenderer _hpRenderer;
-    [SerializeField] ShipHealthColor HealthBarColorData;
+    SpriteRenderer _hp_bar_Renderer;
+    SpriteRenderer ship_renderer;
+    SpriteRenderer flag_renderer;
+
+    Ship _ship;
+
+    [SerializeField] ShipSettings ShipData;
     private void Start()
     {
-        _hpRenderer = GetComponentsInChildren<SpriteRenderer>()[1];
+        
     }
 
     private void Update()
@@ -20,33 +25,38 @@ public class ShipHp : MonoBehaviour
         
     }
 
-    void SetHealthBarColor()
+    void SetColorAndSprite()
     {
-        Color32 new_color = HealthBarColorData.HealthBarColors[0];
+        Color32 hp_bar_new_color = ShipData.HealthBarColors[0];
 
-        if(_hpRenderer.size.x < .75)
+        if(_hp_bar_Renderer.size.x < .75)
         {
-            new_color = HealthBarColorData.HealthBarColors[1];
+            hp_bar_new_color = ShipData.HealthBarColors[1];
+            flag_renderer.sprite = _ship.flags[1];
         }
-        if (_hpRenderer.size.x < .5)
+        if (_hp_bar_Renderer.size.x < .5)
         {
-            new_color = HealthBarColorData.HealthBarColors[2];
+            hp_bar_new_color = ShipData.HealthBarColors[2];
+            flag_renderer.sprite = _ship.flags[2];
+            ship_renderer.sprite = _ship.body[1];
         }
-        if (_hpRenderer.size.x < .25)
+        if (_hp_bar_Renderer.size.x < .25)
         {
-            new_color = HealthBarColorData.HealthBarColors[3];
+            hp_bar_new_color = ShipData.HealthBarColors[3];
+            ship_renderer.sprite = _ship.body[2];
+            flag_renderer.sprite = null;
         }
-        _hpRenderer.color = new_color;
+        _hp_bar_Renderer.color = hp_bar_new_color;
     }
 
     public void ReceiveDamage(int dmg)
     {
-        _hpRenderer.size -= (Vector2.right * dmg)/100f;
+        _hp_bar_Renderer.size -= (Vector2.right * dmg)/100f;
         print("Teste");
-        if (_hpRenderer.size.x <0)
+        if (_hp_bar_Renderer.size.x <0)
         {
-            _hpRenderer.size = Vector2.up;
+            _hp_bar_Renderer.size = Vector2.up;
         }
-        SetHealthBarColor();
+        SetColorAndSprite();
     }
 }

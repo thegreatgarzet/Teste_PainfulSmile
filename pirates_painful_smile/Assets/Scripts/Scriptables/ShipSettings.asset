@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 234dac3bfe6da5d43a0f8815d947032c, type: 3}
+  m_Name: ShipSettings
+  m_EditorClassIdentifier: 
+  HealthBarColors:
+  - {r: 0.04096198, g: 1, b: 0, a: 1}
+  - {r: 1, g: 0.96002454, b: 0.33490568, a: 1}
+  - {r: 1, g: 0.6215465, b: 0.2783019, a: 1}
+  - {r: 1, g: 0.21226418, b: 0.21226418, a: 1}
+  ship_body:
+  - {fileID: -441583000, guid: 7215dc6fc3af2d14385f9b7fa7097f2b, type: 3}
+  - {fileID: 667325504, guid: 7215dc6fc3af2d14385f9b7fa7097f2b, type: 3}
+  - {fileID: -1260288788, guid: 7215dc6fc3af2d14385f9b7fa7097f2b, type: 3}
+  shooter_flags:
+  - {fileID: -1395569101, guid: 7215dc6fc3af2d14385f9b7fa7097f2b, type: 3}
+  - {fileID: 1601391377, guid: 7215dc6fc3af2d14385f9b7fa7097f2b, type: 3}
+  - {fileID: -1451464519, guid: 7215dc6fc3af2d14385f9b7fa7097f2b, type: 3}
+  chaser_flags:
+  - {fileID: -411297185, guid: 7215dc6fc3af2d14385f9b7fa7097f2b, type: 3}
+  - {fileID: -786453061, guid: 7215dc6fc3af2d14385f9b7fa7097f2b, type: 3}
+  - {fileID: 1499585118, guid: 7215dc6fc3af2d14385f9b7fa7097f2b, type: 3}
+  player_flags:
+  - {fileID: 2110337007, guid: 7215dc6fc3af2d14385f9b7fa7097f2b, type: 3}
+  - {fileID: 122050038, guid: 7215dc6fc3af2d14385f9b7fa7097f2b, type: 3}
+  - {fileID: 1373178593, guid: 7215dc6fc3af2d14385f9b7fa7097f2b, type: 3}

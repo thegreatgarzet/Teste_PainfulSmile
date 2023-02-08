@@ -16,6 +16,7 @@ public class Ship : MonoBehaviour
     public bool canShot;
 
     public Transform hpBar;
+    Sprite[] flags, body;
 
     private void Start()
     {
