@@ -9,5 +9,5 @@ public class GameSettings : ScriptableObject
 
     public float spawnTime;
     public float sessionDuration;
-
+    
 }

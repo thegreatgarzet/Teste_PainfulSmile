@@ -6,7 +6,6 @@ public class Ship : MonoBehaviour
 {
 
     public float Hp;
-    public float contactDamage;
     public float bulletDamage;
     public float shipSpeed;
     public float rotationSpeed;
@@ -27,18 +26,26 @@ public class Ship : MonoBehaviour
     public SpriteRenderer flag_Renderer;
 
     public bool canReceiveInput;
+    public Vector2 shipHpBar_Position = new(0,1.6f);
+
+    public GameManager manager;
 
     public virtual void Start()
     {
+        body_Renderer.sprite = body[0];
+        flag_Renderer.sprite = flags[0];
         shipHpBar_Transform.transform.SetParent(null);
+        shipHpBar_Transform.rotation = Quaternion.Euler(Vector3.zero);
+        transform.localScale = Vector2.one * .1f;
+        StartCoroutine(SpawnRoutine());
     }
     public virtual void Update()
     {
-        shipHpBar_Transform.position = (Vector2)transform.position + Vector2.up * 3;
-        if (Input.GetKeyDown(KeyCode.H))
+        if (shipHpBar_Transform != null)
         {
-            ReceiveDamage(10);
+            shipHpBar_Transform.position = (Vector2)transform.position + shipHpBar_Position;
         }
+        
     }
     public void ShootBullet()
     {
@@ -46,7 +53,7 @@ public class Ship : MonoBehaviour
         {
             return;
         }
-        Instantiate(bulletPrefab, sideShotPositions[0].position, Quaternion.identity).SetBulletParam(transform.rotation.eulerAngles, transform, bulletDamage);
+        Instantiate(bulletPrefab, sideShotPositions[0].position, Quaternion.identity).transform.rotation = transform.rotation;
         StartCoroutine(ShotCoolDown(timeBetweenNormalShots));
     }
     public void ShootSideBullets()
@@ -57,28 +64,32 @@ public class Ship : MonoBehaviour
         }
         foreach (Transform spawn_point in sideShotPositions)
         {
-            Instantiate(bulletPrefab, spawn_point.position, Quaternion.identity).SetBulletParam(transform.rotation.eulerAngles + new Vector3(0, 0, 90f), transform, bulletDamage);
-            Instantiate(bulletPrefab, spawn_point.position, Quaternion.identity).SetBulletParam(transform.rotation.eulerAngles + new Vector3(0, 0, -90f), transform, bulletDamage);
+            Instantiate(bulletPrefab, spawn_point.position, Quaternion.identity).transform.rotation = transform.rotation; ;
+            Instantiate(bulletPrefab, spawn_point.position, Quaternion.identity).transform.rotation = transform.rotation;
         }
         StartCoroutine(ShotCoolDown(timeBetweenSideShots));
     }
-    
-
-
-    public void ReceiveDamage(float dmg_value)
+    public float ReceiveDamage(float dmg_value)
     {
         Hp -= dmg_value;
         if (Hp <= 0)
         {
             Hp = 0;
-            canReceiveInput = false;
+            canReceiveInput = false;            
         }
         _shipStatus.SetShipStatus(Hp);
-        
+        CheckHP();
+        return Hp;
     }
-
-    
-
+    public virtual void CheckHP()
+    {
+        if (Hp > 0)
+        {
+            return;
+        }
+        StopAllCoroutines();
+        StartCoroutine(DeathRoutine());
+    }
     IEnumerator ShotCoolDown(float cooldownTimer)
     {
         canShot = false;
@@ -88,11 +99,27 @@ public class Ship : MonoBehaviour
 
     IEnumerator SpawnRoutine()
     {
+        while (transform.localScale.magnitude < Vector3.one.magnitude)
+        {
+            transform.localScale += Vector3.one * Time.deltaTime;
+            yield return null;
+        }
+        canReceiveInput = true;
         yield return null;
     }
 
-    IEnumerator DeathRoutine()
+    public IEnumerator DeathRoutine()
     {
-        yield return null;
+        GetComponent<Collider2D>().enabled = false;
+        canShot = false;
+        canReceiveInput = false;
+        Destroy(shipHpBar_Transform.gameObject);
+        while (transform.localScale.magnitude > (Vector3.one * .1f).magnitude)
+        {
+            transform.Rotate(new Vector3(0, 0, 360 * Time.deltaTime));
+            transform.localScale -= Vector3.one * Time.deltaTime;
+            yield return null;
+        }
+        Destroy(gameObject);
     }
 }

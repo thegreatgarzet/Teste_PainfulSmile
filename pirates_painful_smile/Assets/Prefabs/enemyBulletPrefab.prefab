@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4875560975368652377}
   - component: {fileID: -2395755653233455352}
   m_Layer: 6
-  m_Name: shipBulletPrefab
+  m_Name: enemyBulletPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -2078673533, guid: 16ca41b51267cd148b331deed5be43cc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

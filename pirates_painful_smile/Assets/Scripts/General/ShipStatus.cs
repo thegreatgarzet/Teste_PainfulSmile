@@ -13,8 +13,8 @@ public class ShipStatus : MonoBehaviour
     public void SetShipStatus(float current_hp)
     {
         Color32 hpBar_newColor = _ship.shipData.HealthBarColors[0];
-        Sprite new_BodySprite = _ship.shipData.ship_body[0];
-        Sprite new_FlagSprite = _ship.shipData.player_flags[0];
+        Sprite new_BodySprite = _ship.body[0];
+        Sprite new_FlagSprite = _ship.flags[0];
 
         _ship.hpBar_Renderer.size = new(current_hp / 100f, 1f);
 

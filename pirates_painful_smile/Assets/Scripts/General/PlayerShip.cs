@@ -10,8 +10,6 @@ public class PlayerShip : Ship
     {
         body = shipData.ship_body;
         flags = shipData.player_flags;
-        body_Renderer.sprite = body[0];
-        flag_Renderer.sprite = flags[0];
         base.Start();
     }
 
