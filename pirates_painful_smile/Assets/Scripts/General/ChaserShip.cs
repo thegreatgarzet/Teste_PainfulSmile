@@ -19,6 +19,10 @@ public class ChaserShip : EnemyShip
         {
             return;
         }
+        if(playerReference == null)
+        {
+            return;
+        }
         Vector3 dir = playerReference.transform.position - transform.position; float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
         transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * rotationSpeed);

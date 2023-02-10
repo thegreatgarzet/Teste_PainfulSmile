@@ -12,6 +12,5 @@ public class PlayerBullet : ShipBullet
             hitted_ship.ReceiveDamage(bullet_Damage);
             Destroy(gameObject);
         }
-        
     }
 }

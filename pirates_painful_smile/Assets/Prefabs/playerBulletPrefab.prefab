@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8265713306764013533}
   - component: {fileID: 8265713306764013532}
   - component: {fileID: -2395755653233455352}
-  - component: {fileID: 6595113315025625634}
+  - component: {fileID: 1924821444307788903}
   m_Layer: 6
   m_Name: playerBulletPrefab
   m_TagString: Untagged
@@ -102,7 +102,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &6595113315025625634
+--- !u!114 &1924821444307788903
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -116,5 +116,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet_Movespeed: 10
   bullet_Damage: 15
-  explosionPrefab: {fileID: 2228524716415796304, guid: 253511b95410d354b9ff7f8890a15bd4, type: 3}
   collision_Tag: Obstacle
+  explosionPrefab: {fileID: 2228524716415796304, guid: 253511b95410d354b9ff7f8890a15bd4, type: 3}

@@ -29,17 +29,17 @@ public class Ship : MonoBehaviour
     public Vector2 shipHpBar_Position = new(0,1.6f);
 
     public GameManager manager;
+
     CircleCollider2D _collider;
-    
 
     public virtual void Start()
     {
         body_Renderer.sprite = body[0];
         flag_Renderer.sprite = flags[0];
         shipHpBar_Transform.transform.SetParent(null);
+        _collider = GetComponent<CircleCollider2D>();
         shipHpBar_Transform.rotation = Quaternion.Euler(Vector3.zero);
         transform.localScale = Vector2.one * .1f;
-        _collider = GetComponent<CircleCollider2D>();
         StartCoroutine(SpawnRoutine());
     }
     public virtual void Update()
@@ -118,7 +118,7 @@ public class Ship : MonoBehaviour
         canReceiveInput = false;
         Destroy(shipHpBar_Transform.gameObject);
         StartCoroutine(DeathExplosions());
-        while (transform.localScale.magnitude > (Vector3.one * .1f).magnitude)
+        while (transform.localScale.x > .1f)
         {
             transform.Rotate(new Vector3(0, 0, 360 * Time.deltaTime));
             transform.localScale -= Vector3.one * Time.deltaTime;
@@ -126,14 +126,15 @@ public class Ship : MonoBehaviour
         }
         Destroy(gameObject);
     }
+
     IEnumerator DeathExplosions()
     {
-        float num_of_explosions = 10;
-        
+        float num_of_explosions = 5;
+
         while (num_of_explosions > 0)
         {
             Vector2 explosion_spawn = new(Random.Range(-_collider.radius, _collider.radius), Random.Range(-_collider.radius, _collider.radius));
-            
+
             explosion_spawn *= transform.localScale;
             explosion_spawn += (Vector2)transform.position;
             Instantiate(explosionPrefab, explosion_spawn, Quaternion.identity);

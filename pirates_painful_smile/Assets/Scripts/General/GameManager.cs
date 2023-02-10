@@ -15,14 +15,16 @@ public class GameManager : MonoBehaviour
 
     public GameObject[] enemies_To_Spawn;
     public GameObject playerPrefab;
-    public Transform playerRef;
+    public PlayerShip playerRef;
     public Vector2 playerPosition;
 
     public int session_points;
+    GameFinishedManager gameFinishedManager;
 
     private void Awake()
     {
         spawner = GetComponent<EnemySpawner>();
+        gameFinishedManager = GetComponent<GameFinishedManager>();
         session_Duration = settings.sessionDuration;
         enemies_Spawn_Time = settings.spawnTime;
         spawner.manager = this;
@@ -31,12 +33,13 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(GameRoutine());
     }
+    
     IEnumerator GameRoutine()
     {
         float countdown = countdown_Duration;
         float last_SpawnTime=Time.time;
 
-        playerRef = Instantiate(playerPrefab, playerPosition, Quaternion.identity).transform;
+        playerRef = Instantiate(playerPrefab, playerPosition, Quaternion.identity).GetComponent<PlayerShip>();
 
         while (countdown>0)
         {
@@ -44,6 +47,7 @@ public class GameManager : MonoBehaviour
             countdown_Text.text = Mathf.RoundToInt(countdown).ToString();
             yield return null;
         }
+        countdown_Text.text = "";
         StartCoroutine(spawner.SpawnEnemies(enemies_To_Spawn));
         
 
@@ -55,6 +59,11 @@ public class GameManager : MonoBehaviour
             {
                 StartCoroutine(spawner.SpawnEnemies(enemies_To_Spawn));
                 last_SpawnTime = Time.time;
+            }
+            if(session_Duration==0 || playerRef == null)
+            {
+                StopAllCoroutines();
+                gameFinishedManager.ShowEndGameScreen(session_points, settings.sessionDuration - session_Duration);
             }
             yield return null;
         }

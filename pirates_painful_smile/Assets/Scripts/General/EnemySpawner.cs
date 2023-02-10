@@ -29,7 +29,7 @@ public class EnemySpawner : MonoBehaviour
             EnemyShip new_enemy = Instantiate(enemies_to_spawn[i], spawn_point, Quaternion.identity).GetComponent<EnemyShip>();
             new_enemy.transform.rotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
             new_enemy.manager = manager;
-            new_enemy.playerReference = manager.playerRef;
+            new_enemy.playerReference = manager.playerRef.transform;
             new_enemy.transform.name = i.ToString();
         }
         yield return null;

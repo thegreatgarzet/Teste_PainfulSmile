@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c3a9f88c8fb9e542ac780c9e3e9f1d5, type: 3}
   m_Name: GameSettings
   m_EditorClassIdentifier: 
-  spawnTime: 15
+  spawnTime: 5
   sessionDuration: 300
