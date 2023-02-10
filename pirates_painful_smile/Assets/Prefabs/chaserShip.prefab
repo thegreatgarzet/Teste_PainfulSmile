@@ -348,6 +348,7 @@ MonoBehaviour:
   shipSpeed: 4
   rotationSpeed: 1.7
   bulletPrefab: {fileID: 4875560975368652377, guid: 3c2ad985d2aafdb4a937b373dc2edfb3, type: 3}
+  explosionPrefab: {fileID: 2228524716415796304, guid: 253511b95410d354b9ff7f8890a15bd4, type: 3}
   sideShotPositions:
   - {fileID: 8339213490447534565}
   - {fileID: 8339213491726587006}

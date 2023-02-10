@@ -10,7 +10,7 @@ public class Ship : MonoBehaviour
     public float shipSpeed;
     public float rotationSpeed;
 
-    public ShipBullet bulletPrefab;
+    public GameObject bulletPrefab, explosionPrefab;
     public Transform[] sideShotPositions;
 
     public float timeBetweenNormalShots, timeBetweenSideShots;
@@ -29,6 +29,8 @@ public class Ship : MonoBehaviour
     public Vector2 shipHpBar_Position = new(0,1.6f);
 
     public GameManager manager;
+    CircleCollider2D _collider;
+    
 
     public virtual void Start()
     {
@@ -37,6 +39,7 @@ public class Ship : MonoBehaviour
         shipHpBar_Transform.transform.SetParent(null);
         shipHpBar_Transform.rotation = Quaternion.Euler(Vector3.zero);
         transform.localScale = Vector2.one * .1f;
+        _collider = GetComponent<CircleCollider2D>();
         StartCoroutine(SpawnRoutine());
     }
     public virtual void Update()
@@ -64,8 +67,8 @@ public class Ship : MonoBehaviour
         }
         foreach (Transform spawn_point in sideShotPositions)
         {
-            Instantiate(bulletPrefab, spawn_point.position, Quaternion.identity).transform.rotation = transform.rotation; ;
-            Instantiate(bulletPrefab, spawn_point.position, Quaternion.identity).transform.rotation = transform.rotation;
+            Instantiate(bulletPrefab, spawn_point.position, Quaternion.identity).transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0, 0, -90f));
+            Instantiate(bulletPrefab, spawn_point.position, Quaternion.identity).transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0, 0, +90f));
         }
         StartCoroutine(ShotCoolDown(timeBetweenSideShots));
     }
@@ -114,6 +117,7 @@ public class Ship : MonoBehaviour
         canShot = false;
         canReceiveInput = false;
         Destroy(shipHpBar_Transform.gameObject);
+        StartCoroutine(DeathExplosions());
         while (transform.localScale.magnitude > (Vector3.one * .1f).magnitude)
         {
             transform.Rotate(new Vector3(0, 0, 360 * Time.deltaTime));
@@ -121,5 +125,20 @@ public class Ship : MonoBehaviour
             yield return null;
         }
         Destroy(gameObject);
+    }
+    IEnumerator DeathExplosions()
+    {
+        float num_of_explosions = 10;
+        
+        while (num_of_explosions > 0)
+        {
+            Vector2 explosion_spawn = new(Random.Range(-_collider.radius, _collider.radius), Random.Range(-_collider.radius, _collider.radius));
+            
+            explosion_spawn *= transform.localScale;
+            explosion_spawn += (Vector2)transform.position;
+            Instantiate(explosionPrefab, explosion_spawn, Quaternion.identity);
+            yield return new WaitForSeconds(.3f);
+            num_of_explosions--;
+        }
     }
 }

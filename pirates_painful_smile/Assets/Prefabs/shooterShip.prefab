@@ -600,7 +600,8 @@ MonoBehaviour:
   bulletDamage: 5
   shipSpeed: 0
   rotationSpeed: 1.7
-  bulletPrefab: {fileID: 4875560975368652377, guid: 3c2ad985d2aafdb4a937b373dc2edfb3, type: 3}
+  bulletPrefab: {fileID: 8265713306764013535, guid: 3c2ad985d2aafdb4a937b373dc2edfb3, type: 3}
+  explosionPrefab: {fileID: 2228524716415796304, guid: 253511b95410d354b9ff7f8890a15bd4, type: 3}
   sideShotPositions:
   - {fileID: 2850570948943927845}
   - {fileID: 2850570948120010997}
