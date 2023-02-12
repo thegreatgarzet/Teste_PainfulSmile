@@ -35,6 +35,7 @@ public class ChaserShip : EnemyShip
         if (collision.gameObject.TryGetComponent<PlayerShip>(out PlayerShip hitted_ship))
         {
             hitted_ship.ReceiveDamage(bulletDamage);
+            StopAllCoroutines();
             StartCoroutine(DeathRoutine());
         }
     }
