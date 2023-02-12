@@ -5,41 +5,37 @@ using UnityEngine;
 public class Ship : MonoBehaviour
 {
 
-    public float Hp;
-    public float bulletDamage;
-    public float shipSpeed;
-    public float rotationSpeed;
+    CircleCollider2D _collider;
 
     public GameObject bulletPrefab, explosionPrefab;
     public Transform[] sideShotPositions;
-
-    public float timeBetweenNormalShots, timeBetweenSideShots;
-    public bool canShot;
-
     public Transform shipHpBar_Transform;
     public Sprite[] flags, body;
     public ShipSettings shipData;
     public ShipStatus _shipStatus;
-
     public SpriteRenderer hpBar_Renderer;
     public SpriteRenderer body_Renderer;
     public SpriteRenderer flag_Renderer;
-
-    public bool canReceiveInput;
     public Vector2 shipHpBar_Position = new(0,1.6f);
-
     public GameManager manager;
+    
 
-    CircleCollider2D _collider;
+    public float Hp;
+    public float bulletDamage;
+    public float shipSpeed;
+    public float rotationSpeed;
+    public float timeBetweenNormalShots, timeBetweenSideShots;
+    public bool canReceiveInput;
+    public bool canShot;
 
     public virtual void Start()
     {
         body_Renderer.sprite = body[0];
         flag_Renderer.sprite = flags[0];
         shipHpBar_Transform.transform.SetParent(null);
+        transform.localScale = Vector2.one * .1f;
         _collider = GetComponent<CircleCollider2D>();
         shipHpBar_Transform.rotation = Quaternion.Euler(Vector3.zero);
-        transform.localScale = Vector2.one * .1f;
         StartCoroutine(SpawnRoutine());
     }
     public virtual void Update()
@@ -72,7 +68,7 @@ public class Ship : MonoBehaviour
         }
         StartCoroutine(ShotCoolDown(timeBetweenSideShots));
     }
-    public float ReceiveDamage(float dmg_value)
+    public void ReceiveDamage(float dmg_value)
     {
         Hp -= dmg_value;
         if (Hp <= 0)
@@ -82,7 +78,7 @@ public class Ship : MonoBehaviour
         }
         _shipStatus.SetShipStatus(Hp);
         CheckHP();
-        return Hp;
+        
     }
     public virtual void CheckHP()
     {

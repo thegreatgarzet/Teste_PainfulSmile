@@ -5,8 +5,9 @@ using UnityEngine;
 public class ShooterShip : EnemyShip
 {
     public Transform player;
-    public float raycastDistance;
     public LayerMask layerMask;
+
+    public float raycastDistance;
     public override void Start()
     {
         body = shipData.ship_body;

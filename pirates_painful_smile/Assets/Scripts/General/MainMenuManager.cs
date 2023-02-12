@@ -6,8 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
-    public GameObject mainMenu, optionMenu;
     [SerializeField] GameSettings gameSettings;
+
+    public GameObject mainMenu, optionMenu;
     public TMP_Text sessionDurationText;
     public TMP_Text spawnTimerText;
     private void Start()

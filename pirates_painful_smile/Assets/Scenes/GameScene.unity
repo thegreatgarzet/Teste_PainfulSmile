@@ -293,7 +293,7 @@ Canvas:
   m_OverrideSorting: 1
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 16
   m_TargetDisplay: 0
@@ -1302,7 +1302,7 @@ TilemapRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -1
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
+  m_ChunkCullingBounds: {x: 0.007936537, y: 0.007936537, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 0
@@ -2006,10 +2006,10 @@ MonoBehaviour:
   m_RefResolutionX: 800
   m_RefResolutionY: 800
   m_UpscaleRT: 0
-  m_PixelSnapping: 0
+  m_PixelSnapping: 1
   m_CropFrameX: 1
   m_CropFrameY: 1
-  m_StretchFill: 0
+  m_StretchFill: 1
 --- !u!1 &748084111
 GameObject:
   m_ObjectHideFlags: 0
@@ -2215,13 +2215,13 @@ MonoBehaviour:
   settings: {fileID: 11400000, guid: b13cf0a4f1a717849891aa799a555477, type: 2}
   timer_Text: {fileID: 1807060729}
   countdown_Text: {fileID: 1305606764}
-  countdown_Duration: 3
   enemies_To_Spawn:
   - {fileID: 8339213491951216348, guid: 250379b310c0ce64093491a7a607941c, type: 3}
   - {fileID: 2850570949692165992, guid: 3443f9795cb49074ab91b573d6210957, type: 3}
   playerPrefab: {fileID: 6767053521485239565, guid: 9650752d49d97c84aa790be051cb1954, type: 3}
   playerRef: {fileID: 0}
   playerPosition: {x: 0, y: -5}
+  countdown_Duration: 3
   session_points: 0
 --- !u!114 &792631378
 MonoBehaviour:
@@ -2297,9 +2297,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Game
+  m_text: 'Time
 
-    Time'
+    Played'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1aaf91174ded94b4ab46fe75108184c2, type: 2}
   m_sharedMaterial: {fileID: 5687885934570745820, guid: 1aaf91174ded94b4ab46fe75108184c2, type: 2}
@@ -2655,7 +2655,7 @@ TilemapRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
+  m_ChunkCullingBounds: {x: 0.007936537, y: 0.007936537, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 0
@@ -2881,7 +2881,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Enemies Defeated
+  m_text: Ships Sinked
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1aaf91174ded94b4ab46fe75108184c2, type: 2}
   m_sharedMaterial: {fileID: 5687885934570745820, guid: 1aaf91174ded94b4ab46fe75108184c2, type: 2}
@@ -3398,7 +3398,7 @@ Canvas:
   m_OverrideSorting: 1
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 16
   m_TargetDisplay: 0
@@ -3460,7 +3460,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Game Finished!
+  m_text: Game Over!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1aaf91174ded94b4ab46fe75108184c2, type: 2}
   m_sharedMaterial: {fileID: 5687885934570745820, guid: 1aaf91174ded94b4ab46fe75108184c2, type: 2}
@@ -3612,7 +3612,7 @@ TilemapRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -2
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
+  m_ChunkCullingBounds: {x: 0.007936537, y: 0.007936537, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 0
@@ -25249,9 +25249,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae1a5edd8969d9347b784aa185af1404, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  x_speed: 0.05
-  y_speed: 0.05
-  use_delta_time: 1
 --- !u!1 &1877614182
 GameObject:
   m_ObjectHideFlags: 0

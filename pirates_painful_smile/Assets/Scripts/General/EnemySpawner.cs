@@ -12,8 +12,6 @@ public class EnemySpawner : MonoBehaviour
 
     public IEnumerator SpawnEnemies(GameObject[] enemies_to_spawn)
     {
-        
-
         for (int i = 0; i < enemies_to_spawn.Length; i++)
         {
             Vector2 spawn_point = Vector2.zero;
@@ -23,14 +21,12 @@ public class EnemySpawner : MonoBehaviour
             {
                 spawn_point = new(Random.Range(-spawnArea.x / 2, spawnArea.x / 2), Random.Range(-spawnArea.y / 2, spawnArea.y / 2));
                 spawnPointFree = !Physics2D.OverlapBox(spawn_point, checkArea, 0f, obstacleMask);
-                print(spawnPointFree);
             }
 
             EnemyShip new_enemy = Instantiate(enemies_to_spawn[i], spawn_point, Quaternion.identity).GetComponent<EnemyShip>();
             new_enemy.transform.rotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
             new_enemy.manager = manager;
             new_enemy.playerReference = manager.playerRef.transform;
-            new_enemy.transform.name = i.ToString();
         }
         yield return null;
     }

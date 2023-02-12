@@ -18,17 +18,10 @@ public class ShipStatus : MonoBehaviour
 
         _ship.hpBar_Renderer.size = new(current_hp / 100f, 1f);
 
-        if (current_hp < 0f)
-        {
-            _ship.hpBar_Renderer.size = Vector2.up;
-        }
-
         if (current_hp < 75f)
         {
             hpBar_newColor = _ship.shipData.HealthBarColors[1];
             new_FlagSprite = _ship.flags[1];
-
-
         }
         if (current_hp < 50f)
         {
@@ -41,6 +34,11 @@ public class ShipStatus : MonoBehaviour
             hpBar_newColor = _ship.shipData.HealthBarColors[3];
             new_FlagSprite = null;
             new_BodySprite = _ship.body[2];
+        }
+
+        if (current_hp < 0f)
+        {
+            _ship.hpBar_Renderer.size = Vector2.up;
         }
 
         _ship.hpBar_Renderer.color = hpBar_newColor;

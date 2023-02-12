@@ -114,7 +114,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f77a0f608f0c66943b2c003e6e5fbeac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionPrefab: {fileID: 2228524716415796304, guid: 253511b95410d354b9ff7f8890a15bd4, type: 3}
+  smokePrefab: {fileID: 5170718985331549261, guid: 49b9560394736ad48b15d33ff8fd5c72, type: 3}
   bullet_Movespeed: 10
   bullet_Damage: 5
   collision_Tag: Obstacle
-  explosionPrefab: {fileID: 2228524716415796304, guid: 253511b95410d354b9ff7f8890a15bd4, type: 3}

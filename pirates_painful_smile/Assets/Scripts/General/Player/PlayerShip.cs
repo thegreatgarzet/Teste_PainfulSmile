@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PlayerShip : Ship
 {
-    
-
     public override void Start()
     {
         body = shipData.ship_body;

@@ -6,27 +6,28 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    EnemySpawner spawner;
+    GameFinishedManager gameFinishedManager;
     [SerializeField]GameSettings settings;
     [SerializeField] TMP_Text timer_Text, countdown_Text;
-    EnemySpawner spawner;
-    float session_Duration;
-    float enemies_Spawn_Time;
-    public float countdown_Duration;
 
     public GameObject[] enemies_To_Spawn;
     public GameObject playerPrefab;
     public PlayerShip playerRef;
     public Vector2 playerPosition;
 
+    float sessionDuration;
+    float enemies_SpawnTime;
+    public float countdown_Duration;
     public int session_points;
-    GameFinishedManager gameFinishedManager;
+    
 
     private void Awake()
     {
         spawner = GetComponent<EnemySpawner>();
         gameFinishedManager = GetComponent<GameFinishedManager>();
-        session_Duration = settings.sessionDuration;
-        enemies_Spawn_Time = settings.spawnTime;
+        sessionDuration = settings.sessionDuration;
+        enemies_SpawnTime = settings.spawnTime;
         spawner.manager = this;
     }
     private void Start()
@@ -51,19 +52,19 @@ public class GameManager : MonoBehaviour
         StartCoroutine(spawner.SpawnEnemies(enemies_To_Spawn));
         
 
-        while (session_Duration>0)
+        while (sessionDuration>0)
         {
-            session_Duration -= Time.deltaTime;
-            timer_Text.text = Mathf.RoundToInt(session_Duration).ToString();
-            if (Time.time >= last_SpawnTime + enemies_Spawn_Time)
+            sessionDuration -= Time.deltaTime;
+            timer_Text.text = Mathf.RoundToInt(sessionDuration).ToString();
+            if (Time.time >= last_SpawnTime + enemies_SpawnTime)
             {
                 StartCoroutine(spawner.SpawnEnemies(enemies_To_Spawn));
                 last_SpawnTime = Time.time;
             }
-            if(session_Duration==0 || playerRef == null)
+            if(sessionDuration==0 || playerRef == null)
             {
                 StopAllCoroutines();
-                gameFinishedManager.ShowEndGameScreen(session_points, settings.sessionDuration - session_Duration);
+                gameFinishedManager.ShowEndGameScreen(session_points, settings.sessionDuration - sessionDuration);
             }
             yield return null;
         }
